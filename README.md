@@ -118,6 +118,26 @@ Here's an example of a nested function which is not a closure.
     printer = make_printer("Foo!")
     printer()  #Output: Foo!
 
+**talk about deep and shallow copy**
+
+For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other.
+
+The difference between shallow and deep copying is only relevant for compound objects (objects that contain other objects, like lists or class instances):
+
+* A shallow copy constructs a new compound object and then (to the extent possible) inserts references into it to the objects found in the original.
+
+* A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.
+
+Two problems often exist with deep copy operations that don’t exist with shallow copy operations:
+
+* Recursive objects (compound objects that, directly or indirectly, contain a reference to themselves) may cause a recursive loop. 
+* Because deep copy copies everything it may copy too much, such as data which is intended to be shared between copies.
+
+The deepcopy() function avoids these problems by:
+
+* keeping a memo dictionary of objects already copied during the current copying pass; and
+  
+* letting user-defined classes override the copying operation or the set of components copied.
 
     
 #### Design Q/A
